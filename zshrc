@@ -51,7 +51,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$HOME/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -78,8 +78,7 @@ export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-eval `/usr/libexec/path_helper -s`
-archey
+
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
@@ -93,3 +92,16 @@ ranstring() {
 	fi
 	echo $(head /dev/random | shasum -a512 | head -c 128 | head -c${count})
 }
+
+mcd() {
+	mkdir $@;
+	cd $@;
+}
+
+if [ $USERNAME = "eb3f3be" ]; then # uberspace
+	export PATH="$PATH:$HOME/.gem/ruby/1.8/bin"
+else                               # home
+	eval `/usr/libexec/path_helper -s`
+	archey
+	. /Users/benedikt/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+fi
